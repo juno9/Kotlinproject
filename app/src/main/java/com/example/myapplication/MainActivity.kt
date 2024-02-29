@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             val enteredEmail : String = edtxt_email_input.text.toString()//입력받은 값 스트링으로 담음
             val enteredPW : String =edtxt_pw_input.text.toString() // 입력받은 값 스트링으로 담음
             var retrofit = Retrofit.Builder()
-                .baseUrl("http://172.30.1.50:8000")
+                .baseUrl("http://172.30.1.50:8000")//URL, 포트 바꿔줘야
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
