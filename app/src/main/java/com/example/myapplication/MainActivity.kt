@@ -6,6 +6,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +32,23 @@ class MainActivity : AppCompatActivity() {
 
             val enteredEmail : String = edtxt_email_input.text.toString()//입력받은 값 스트링으로 담음
             val enteredPW : String =edtxt_pw_input.text.toString() // 입력받은 값 스트링으로 담음
+            var retrofit = Retrofit.Builder()
+                .baseUrl("http://172.30.1.50:8000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
+            var loginService: LoginService = retrofit.create(LoginService::class.java)
+
+            loginService.requestLogin(enteredEmail,enteredPW).enqueue(object: Callback<Login> {
+                override fun onFailure(call: Call<Login>, t: Throwable) {
+                    //실패할 경우
+                }
+
+                override fun onResponse(call: Call<Login>, response: Response<Login>) {
+                    //정상응답이 올경우
+                }
+
+            })
 
 
         }
